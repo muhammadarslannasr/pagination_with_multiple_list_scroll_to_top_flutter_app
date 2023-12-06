@@ -59,16 +59,6 @@ class _MultipleListPaginationScreenState
         }
       });
     });
-
-    // if (listNumber == 1) {
-    //   setState(() {
-    //     itemList1.addAll(fetchDataForPage(++currentPage1));
-    //   });
-    // } else if (listNumber == 2) {
-    //   setState(() {
-    //     itemList2.addAll(fetchDataForPage(++currentPage2));
-    //   });
-    // }
   }
 
   List<String> fetchDataForPage(int page) {
