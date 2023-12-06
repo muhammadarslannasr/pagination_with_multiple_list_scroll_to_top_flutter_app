@@ -16,6 +16,9 @@ class _MultipleListPaginationScreenState
   int currentPage1 = 1;
   int currentPage2 = 1;
 
+  bool isLoadingList1 = false;
+  bool isLoadingList2 = false;
+
   final ScrollController _scrollController = ScrollController();
 
   @override
@@ -35,15 +38,37 @@ class _MultipleListPaginationScreenState
 
   void _loadMoreData(int listNumber) {
     // Fetch more data based on the current page for the specified list
-    if (listNumber == 1) {
+
+    setState(() {
+      if (listNumber == 1) {
+        isLoadingList1 = true;
+      } else {
+        isLoadingList2 = true;
+      }
+    });
+
+    // Simulate fetching data from an API or other source
+    Future.delayed(const Duration(seconds: 2), () {
       setState(() {
-        itemList1.addAll(fetchDataForPage(++currentPage1));
+        if (listNumber == 1) {
+          itemList1.addAll(fetchDataForPage(++currentPage1));
+          isLoadingList1 = false;
+        } else {
+          itemList2.addAll(fetchDataForPage(++currentPage2));
+          isLoadingList2 = false;
+        }
       });
-    } else if (listNumber == 2) {
-      setState(() {
-        itemList2.addAll(fetchDataForPage(++currentPage2));
-      });
-    }
+    });
+
+    // if (listNumber == 1) {
+    //   setState(() {
+    //     itemList1.addAll(fetchDataForPage(++currentPage1));
+    //   });
+    // } else if (listNumber == 2) {
+    //   setState(() {
+    //     itemList2.addAll(fetchDataForPage(++currentPage2));
+    //   });
+    // }
   }
 
   List<String> fetchDataForPage(int page) {
@@ -92,6 +117,7 @@ class _MultipleListPaginationScreenState
                 );
               },
             ),
+            if (isLoadingList1) const CircularProgressIndicator(),
             buildLoadMoreButton(1),
             ListView.builder(
               shrinkWrap: true,
@@ -104,6 +130,7 @@ class _MultipleListPaginationScreenState
                 );
               },
             ),
+            if (isLoadingList2) const CircularProgressIndicator(),
             buildLoadMoreButton(2),
           ],
         ),
