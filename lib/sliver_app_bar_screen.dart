@@ -16,6 +16,7 @@ class _SliverAppBarScreenState extends State<SliverAppBarScreen> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
+            scrolledUnderElevation: 0,
             automaticallyImplyLeading: false,
             toolbarHeight: 25,
             elevation: 0,
@@ -28,8 +29,8 @@ class _SliverAppBarScreenState extends State<SliverAppBarScreen> {
               top = constraints.biggest.height;
               return FlexibleSpaceBar(
                 centerTitle: top > 85 ? false : true,
-                titlePadding: EdgeInsets.only(left: 16, bottom: 10),
-                title: Text(
+                titlePadding: const EdgeInsets.only(left: 16, bottom: 10),
+                title: const Text(
                   "Flutter Title",
                   style: TextStyle(
                     color: Colors.black,
@@ -42,11 +43,22 @@ class _SliverAppBarScreenState extends State<SliverAppBarScreen> {
               );
             }),
           ),
-          SliverToBoxAdapter(
-            child: Container(
-              height: 1000,
-              color: Colors.blue,
-              child: Center(child: Text("Gridview")),
+          // SliverToBoxAdapter(
+          //   child: Container(
+          //     height: 1000,
+          //     color: Colors.blue,
+          //     child: Center(child: Text("Gridview")),
+          //   ),
+          // ),
+
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                return ListTile(
+                  title: Text('Item $index'),
+                );
+              },
+              childCount: 50,
             ),
           ),
         ],
