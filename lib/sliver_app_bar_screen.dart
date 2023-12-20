@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class SliverAppBarScreen extends StatefulWidget {
   const SliverAppBarScreen({super.key});
@@ -12,25 +13,28 @@ class _SliverAppBarScreenState extends State<SliverAppBarScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            scrolledUnderElevation: 0,
             automaticallyImplyLeading: false,
-            toolbarHeight: 25,
+            toolbarHeight: 2.h,
+            scrolledUnderElevation: 0.0,
             elevation: 0,
             pinned: true,
             floating: true,
-            collapsedHeight: 40,
-            expandedHeight: 60,
+            collapsedHeight: 5.h,
+            expandedHeight: 8.h,
             flexibleSpace: LayoutBuilder(
                 builder: (BuildContext context, BoxConstraints constraints) {
               top = constraints.biggest.height;
+              print(top.toString());
+              print('Height: ${10.h}');
               return FlexibleSpaceBar(
-                centerTitle: top > 85 ? false : true,
-                titlePadding: const EdgeInsets.only(left: 16, bottom: 10),
-                title: const Text(
+                centerTitle: top > 12.h ? false : true,
+                titlePadding: EdgeInsets.only(left: 16, bottom: 10),
+                title: Text(
                   "Flutter Title",
                   style: TextStyle(
                     color: Colors.black,
@@ -43,14 +47,6 @@ class _SliverAppBarScreenState extends State<SliverAppBarScreen> {
               );
             }),
           ),
-          // SliverToBoxAdapter(
-          //   child: Container(
-          //     height: 1000,
-          //     color: Colors.blue,
-          //     child: Center(child: Text("Gridview")),
-          //   ),
-          // ),
-
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
