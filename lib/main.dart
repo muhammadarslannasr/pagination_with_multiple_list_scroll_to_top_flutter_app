@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mixup_tries_project/aligned_column_inner_row.dart';
+import 'package:flutter_mixup_tries_project/customCarousel/custom_carousel_slider.dart';
 import 'package:flutter_mixup_tries_project/modal_full_background/main_screen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -22,7 +23,8 @@ class MyApp extends StatelessWidget {
         // home: const MultipleListPaginationScreen(),
         // home: const SliverAppBarScreen(),
         // home: const AlignedColumnInnerRow(),
-        home: const MainScreen(),
+        // home: const MainScreen(),
+        home: const CustomCarouselSlider(),
       );
     });
   }
