@@ -3,6 +3,7 @@ import 'package:flutter_mixup_tries_project/aligned_column_inner_row.dart';
 import 'package:flutter_mixup_tries_project/customCarousel/custom_carousel_slider.dart';
 import 'package:flutter_mixup_tries_project/horizontal_scroll_paginated_screen/horizontal_scroll_paginated_screen.dart';
 import 'package:flutter_mixup_tries_project/modal_full_background/main_screen.dart';
+import 'package:flutter_mixup_tries_project/whatsapp_send_image_screen/whatsapp_send_image_screen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 void main() {
@@ -26,7 +27,8 @@ class MyApp extends StatelessWidget {
         // home: const AlignedColumnInnerRow(),
         // home: const MainScreen(),
         // home: const CustomCarouselSlider(),
-        home: const HorizontalScrollPaginatedScreen(),
+        // home: const HorizontalScrollPaginatedScreen(),
+        home: const WhatsAppSendImageScreen(),
       );
     });
   }
