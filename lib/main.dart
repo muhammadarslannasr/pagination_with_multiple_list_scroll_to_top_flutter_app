@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mixup_tries_project/aligned_column_inner_row.dart';
 import 'package:flutter_mixup_tries_project/barcode_scanner_with_overlay/bar_code_scanner_with_overlay.dart';
 import 'package:flutter_mixup_tries_project/customCarousel/custom_carousel_slider.dart';
+import 'package:flutter_mixup_tries_project/flutter_barcode_scanner_screen/flutter_barcode_scanner_screen.dart';
 import 'package:flutter_mixup_tries_project/horizontal_scroll_paginated_screen/horizontal_scroll_paginated_screen.dart';
 import 'package:flutter_mixup_tries_project/modal_full_background/main_screen.dart';
 import 'package:flutter_mixup_tries_project/scanner/scanner_screen.dart';
@@ -31,8 +32,9 @@ class MyApp extends StatelessWidget {
         // home: const CustomCarouselSlider(),
         // home: const HorizontalScrollPaginatedScreen(),
         // home: const WhatsAppSendImageScreen(),
-        home: const ScannerScreen(),
+        // home: const ScannerScreen(),
         // home: const BarcodeScannerWithOverlay(),
+        home: const FlutterBarCodeScannerScreen(),
       );
     });
   }
