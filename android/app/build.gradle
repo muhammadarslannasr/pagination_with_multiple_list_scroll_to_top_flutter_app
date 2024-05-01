@@ -67,4 +67,11 @@ flutter {
     source '../..'
 }
 
-dependencies {}
+dependencies {
+    implementation 'com.igaworks.ssp:IgawAdPopcornSSP:3.3.9'
+//    implementation fileTree(dir: 'libs', include: ['*.jar'])
+//    implementation (name: 'AdPopcornSSP_3.3.9', ext: 'aar')
+//    repositories {
+//        flatDir { dirs 'libs' }
+//    }
+}
