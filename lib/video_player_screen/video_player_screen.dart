@@ -1,5 +1,6 @@
 import 'package:cached_video_player_plus/cached_video_player_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mixup_tries_project/native_communicator/native_communicator.dart';
 
 class VideoPlayerScreen extends StatefulWidget {
   const VideoPlayerScreen({super.key});
@@ -11,9 +12,12 @@ class VideoPlayerScreen extends StatefulWidget {
 class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   late CachedVideoPlayerPlusController controller;
 
+  String nativeText = '';
+
   @override
   void initState() {
     super.initState();
+    gettingData();
     controller = CachedVideoPlayerPlusController.networkUrl(
       Uri.parse(
         'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
@@ -29,6 +33,13 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       });
   }
 
+  void gettingData() async {
+    final data = await NativeCommunicator.getNativeData();
+    setState(() {
+      nativeText = data;
+    });
+  }
+
   @override
   void dispose() {
     controller.dispose();
@@ -41,13 +52,27 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       appBar: AppBar(
         title: const Text('Video Player'),
       ),
-      body: Center(
-        child: controller.value.isInitialized
-            ? AspectRatio(
-                aspectRatio: controller.value.aspectRatio,
-                child: CachedVideoPlayerPlus(controller),
-              )
-            : const CircularProgressIndicator(),
+      body: Column(
+        children: [
+          Text(
+            'Native Text showing below',
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Text(nativeText),
+          SizedBox(
+            height: 20,
+          ),
+          Center(
+            child: controller.value.isInitialized
+                ? AspectRatio(
+                    aspectRatio: controller.value.aspectRatio,
+                    child: CachedVideoPlayerPlus(controller),
+                  )
+                : const CircularProgressIndicator(),
+          ),
+        ],
       ),
     );
   }
