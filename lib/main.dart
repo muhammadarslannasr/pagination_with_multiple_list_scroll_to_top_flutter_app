@@ -6,6 +6,7 @@ import 'package:flutter_mixup_tries_project/flutter_barcode_scanner_screen/flutt
 import 'package:flutter_mixup_tries_project/horizontal_scroll_paginated_screen/horizontal_scroll_paginated_screen.dart';
 import 'package:flutter_mixup_tries_project/modal_full_background/main_screen.dart';
 import 'package:flutter_mixup_tries_project/scanner/scanner_screen.dart';
+import 'package:flutter_mixup_tries_project/upload_page.dart';
 import 'package:flutter_mixup_tries_project/video_player_screen/video_player_screen.dart';
 import 'package:flutter_mixup_tries_project/whatsapp_send_image_screen/whatsapp_send_image_screen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -36,7 +37,8 @@ class MyApp extends StatelessWidget {
         // home: const ScannerScreen(),
         // home: const BarcodeScannerWithOverlay(),
         // home: const FlutterBarCodeScannerScreen(),
-        home: const VideoPlayerScreen(),
+        // home: const VideoPlayerScreen(),
+        home: const UploadPage(),
       );
     });
   }
