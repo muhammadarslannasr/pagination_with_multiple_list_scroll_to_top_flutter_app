@@ -16,35 +16,43 @@ class _PopUpMenuListViewBuilderScreenState extends State<PopUpMenuListViewBuilde
       appBar: AppBar(
         title: const Text('ListView with PopupMenuButton'),
       ),
-      body: ListView.builder(
-        itemCount: items.length,
-        itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            title: Text(items[index]),
-            trailing: PopupMenuButton<String>(
-              position: PopupMenuPosition.under,
-              offset: const Offset(0, 32),
-              itemBuilder: (BuildContext context) {
-                return ['Edit', 'Delete'].map((String choice) {
-                  return PopupMenuItem<String>(
-                    value: choice,
-                    child: Text(choice),
-                  );
-                }).toList();
-              },
-              onSelected: (String choice) {
-                // Handle menu item selection
-                if (choice == 'Edit') {
-                  // Implement edit functionality
-                  print('Edit item: ${items[index]}');
-                } else if (choice == 'Delete') {
-                  // Implement delete functionality
-                  print('Delete item: ${items[index]}');
-                }
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            ListView.builder(
+              itemCount: items.length,
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemBuilder: (BuildContext context, int index) {
+                return ListTile(
+                  title: Text(items[index]),
+                  trailing: PopupMenuButton<String>(
+                    position: PopupMenuPosition.under,
+                    //offset: const Offset(0, 32),
+                    itemBuilder: (BuildContext context) {
+                      return ['Edit', 'Delete'].map((String choice) {
+                        return PopupMenuItem<String>(
+                          value: choice,
+                          child: Text(choice),
+                        );
+                      }).toList();
+                    },
+                    onSelected: (String choice) {
+                      // Handle menu item selection
+                      if (choice == 'Edit') {
+                        // Implement edit functionality
+                        print('Edit item: ${items[index]}');
+                      } else if (choice == 'Delete') {
+                        // Implement delete functionality
+                        print('Delete item: ${items[index]}');
+                      }
+                    },
+                  ),
+                );
               },
             ),
-          );
-        },
+          ],
+        ),
       ),
     );
   }
