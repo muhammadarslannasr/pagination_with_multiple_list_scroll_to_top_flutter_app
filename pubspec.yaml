@@ -52,6 +52,8 @@ dependencies:
   avatar_glow: ^3.0.1
   speech_to_text: ^6.6.1
   flutter_custom_tabs: ^2.0.0+1
+  pylons_sdk: ^0.1.4
+  fixnum: ^1.1.0
 
 dev_dependencies:
   flutter_test:
