@@ -54,6 +54,8 @@ dependencies:
   flutter_custom_tabs: ^2.0.0+1
   pylons_sdk: ^0.1.4
   fixnum: ^1.1.0
+  mask_text_input_formatter: ^2.9.0
+  intl:
 
 dev_dependencies:
   flutter_test:
