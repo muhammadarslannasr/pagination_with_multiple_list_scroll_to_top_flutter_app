@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class TextFormFieldFormatterScreen extends StatefulWidget {
   const TextFormFieldFormatterScreen({super.key});
@@ -11,7 +9,7 @@ class TextFormFieldFormatterScreen extends StatefulWidget {
 }
 
 class _TextFormFieldFormatterScreenState extends State<TextFormFieldFormatterScreen> {
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
