@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mixup_tries_project/customPainter/custom_painter_example.dart';
+import 'package:flutter_mixup_tries_project/card_validations_screen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:pylons_sdk/pylons_sdk.dart';
 
@@ -40,7 +40,8 @@ class MyApp extends StatelessWidget {
         // home: const PopUpMenuListViewBuilderScreen(),
         // home: const PylonsSdkScreen(),
         // home: const TextFormFieldFormatterScreen(),
-        home: const CustomPainterExample(),
+        // home: const CustomPainterExample(),
+        home: const CardValidationsScreen(),
       );
     });
   }
