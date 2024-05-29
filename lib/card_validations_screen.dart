@@ -1,3 +1,4 @@
+import 'package:credit_card_validator/credit_card_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
@@ -11,19 +12,39 @@ class CardValidationsScreen extends StatefulWidget {
 
 class _CardValidationsScreenState extends State<CardValidationsScreen> {
   TextEditingController cardNumberController = TextEditingController();
+  TextEditingController cvvNumberController = TextEditingController();
 
   CardType cardType = CardType.Invalid;
 
-  var controller = MaskedTextController(mask: '00/00');
+  String _expiryDate = '';
+
+  // final _expiryDateController = MaskedTextController(mask: '00/00', text: _expiryDate);
+  late final MaskedTextController _expiryDateController;
+
+  String expiryDateIs = '';
 
   @override
   void initState() {
+    _expiryDateController = MaskedTextController(mask: '00 / 00', text: _expiryDate);
+
     cardNumberController.addListener(
       () {
         getCardTypeFrmNumber();
       },
     );
     super.initState();
+  }
+
+  void _onExpiryDateChange(String value) {
+    final String expiry = _expiryDateController.text;
+    _expiryDateController.text = expiry.startsWith(RegExp('[2-9]')) ? '0$expiry' : expiry;
+    setState(() {
+      // creditCardModel.expiryDate = expiryDate = expiry;
+      // onCreditCardModelChange(creditCardModel);
+      expiryDateIs = _expiryDate = expiry;
+    });
+
+    debugPrint('ExpiryDate: ${expiryDateIs}');
   }
 
   @override
@@ -69,6 +90,7 @@ class _CardValidationsScreenState extends State<CardValidationsScreen> {
                       children: [
                         Expanded(
                           child: TextFormField(
+                            controller: cvvNumberController,
                             keyboardType: TextInputType.number,
                             inputFormatters: [
                               FilteringTextInputFormatter.digitsOnly,
@@ -81,14 +103,22 @@ class _CardValidationsScreenState extends State<CardValidationsScreen> {
                         const SizedBox(width: 16),
                         Expanded(
                           child: TextFormField(
-                            controller: controller,
+                            controller: _expiryDateController,
                             keyboardType: TextInputType.number,
+                            onChanged: (v) {
+                              _onExpiryDateChange(v);
+                            },
                             inputFormatters: [
                               FilteringTextInputFormatter.digitsOnly,
+                              //_LeadingZeroFormatter(),
                               // LengthLimitingTextInputFormatter(5),
                               // CardMonthInputFormatter(),
                             ],
                             decoration: const InputDecoration(hintText: "MM/YY"),
+                            validator: (String? value) => CardUtils.expiryDateValidator(
+                              value,
+                              'Please input a valid date',
+                            ),
                           ),
                         ),
                       ],
@@ -101,7 +131,13 @@ class _CardValidationsScreenState extends State<CardValidationsScreen> {
                 padding: const EdgeInsets.only(top: 16),
                 child: ElevatedButton(
                   child: const Text("Add card"),
-                  onPressed: () {},
+                  onPressed: () {
+                    CreditCardValidatorUtils.validateCreditCardInfo(
+                      ccNumber: cardNumberController.text,
+                      expDate: expiryDateIs,
+                      cvvNumber: cvvNumberController.text,
+                    );
+                  },
                 ),
               ),
               const Spacer(),
@@ -166,6 +202,28 @@ class CardMonthInputFormatter extends TextInputFormatter {
 }
 
 class CardUtils {
+  static String? expiryDateValidator(String? value, String errorMsg) {
+    if (value?.isEmpty ?? true) {
+      return errorMsg;
+    }
+
+    final DateTime now = DateTime.now();
+    final List<String> date = value!.split(RegExp(r'/'));
+
+    final int month = int.parse(date.first);
+    final int year = int.parse('20${date.last}');
+
+    final int lastDayOfMonth = month < 12 ? DateTime(year, month + 1, 0).day : DateTime(year + 1, 1, 0).day;
+
+    final DateTime cardDate = DateTime(year, month, lastDayOfMonth, 23, 59, 59, 999);
+
+    if (cardDate.isBefore(now) || month > 12 || month == 0) {
+      return errorMsg;
+    }
+
+    return null;
+  }
+
   static CardType getCardTypeFrmNumber(String input) {
     CardType cardType;
     if (input.startsWith(RegExp(r'((5[1-5])|(222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720))'))) {
@@ -355,6 +413,30 @@ class CardUtils {
     // The year has passed if the year we are currently is more than card's
     // year
     return fourDigitsYear < now.year;
+  }
+}
+
+class CreditCardValidatorUtils {
+  static final CreditCardValidator _ccValidator = CreditCardValidator();
+
+  static bool validateCreditCardInfo({required String ccNumber, required String expDate, required String cvvNumber}) {
+    bool cardDetail = false;
+
+    String removeSpaceFromText = expDate.replaceAll(" ", "");
+
+    var ccNumberResults = _ccValidator.validateCCNum(ccNumber);
+    var ccExpiryDateResults = _ccValidator.validateExpDate(removeSpaceFromText);
+    var ccCvvNumberResults = _ccValidator.validateCVV(cvvNumber, ccNumberResults.ccType);
+
+    if (ccNumberResults.isValid && ccExpiryDateResults.isValid && ccCvvNumberResults.isValid) {
+      cardDetail = true;
+      debugPrint('Cards Detail is valid');
+    } else {
+      cardDetail = false;
+      debugPrint('Cards Detail is inValid');
+    }
+
+    return cardDetail;
   }
 }
 
