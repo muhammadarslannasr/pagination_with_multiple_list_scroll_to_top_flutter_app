@@ -60,6 +60,7 @@ dependencies:
   flutter_credit_card: ^4.0.1
   flutter_masked_text2: ^0.9.1
   credit_card_validator: ^2.1.0
+  flutter_web_browser: ^0.17.1
 
 dev_dependencies:
   flutter_test:
