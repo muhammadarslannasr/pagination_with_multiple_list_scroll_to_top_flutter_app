@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mixup_tries_project/card_validations_screen.dart';
-import 'package:flutter_mixup_tries_project/inn_app_web_browser_flutter/flutter_web_browser_example_screen.dart';
+import 'package:flutter_mixup_tries_project/inn_app_web_browser_flutter/flutter_in_app_webview_browser_screen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:pylons_sdk/pylons_sdk.dart';
 
@@ -43,7 +42,8 @@ class MyApp extends StatelessWidget {
         // home: const TextFormFieldFormatterScreen(),
         // home: const CustomPainterExample(),
         // home: const CardValidationsScreen(),
-        home: const FlutterWebBrowserExampleScreen(),
+        // home: const FlutterWebBrowserExampleScreen(),
+        home: const FlutterInAppWebViewBrowserScreen(),
       );
     });
   }
