@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mixup_tries_project/inn_app_web_browser_flutter/flutter_in_app_webview_browser_screen.dart';
+import 'package:flutter_mixup_tries_project/speech_to_text/speech_to_text_example_screen.dart';
+import 'package:flutter_mixup_tries_project/speech_to_text/speech_to_text_screen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:pylons_sdk/pylons_sdk.dart';
 
@@ -35,7 +37,7 @@ class MyApp extends StatelessWidget {
         // home: const FlutterBarCodeScannerScreen(),
         // home: const VideoPlayerScreen(),
         // home: const UploadPage(),
-        // home: const SpeechToTextScreen(),
+        home: const SpeechToTextScreen(),
         // home: const InnAppWebBrowserScreen(),
         // home: const PopUpMenuListViewBuilderScreen(),
         // home: const PylonsSdkScreen(),
@@ -43,7 +45,8 @@ class MyApp extends StatelessWidget {
         // home: const CustomPainterExample(),
         // home: const CardValidationsScreen(),
         // home: const FlutterWebBrowserExampleScreen(),
-        home: const FlutterInAppWebViewBrowserScreen(),
+        // home: const FlutterInAppWebViewBrowserScreen(),
+        // home: const SpeechToTextExampleScreen(),
       );
     });
   }
